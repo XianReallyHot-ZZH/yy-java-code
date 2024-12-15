@@ -1,4 +1,4 @@
-package com.yy.rpc.producer;
+package com.yy.rpc.consumer;
 
 /**
  * 模拟一个服务接口
