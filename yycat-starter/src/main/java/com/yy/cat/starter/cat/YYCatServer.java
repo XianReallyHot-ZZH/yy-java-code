@@ -46,6 +46,12 @@ public class YYCatServer {
     public void start() throws Exception {
         // 加载指定包中的所有Servlet的类名
         cacheServlet(baseYYServletPath);
+        // 打印缓存结果
+        System.out.println("扫描路径：" + baseYYServletPath + ", 识别缓存的servlet实现类：");
+        for (Map.Entry<String, String> entry : nameToClassNameMap.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
+
         // 启动server服务
         runServer();
     }
@@ -124,12 +130,6 @@ public class YYCatServer {
                     nameToClassNameMap.put(simpleClassName, baseYYServletPath + "." + simpleClassName);
                 }
             }
-        }
-
-        // 打印缓存结果
-        System.out.println("扫描路径：" + baseYYServletPath + ", 识别缓存的servlet实现类：");
-        for (Map.Entry<String, String> entry : nameToClassNameMap.entrySet()) {
-            System.out.println(entry.getKey() + ":" + entry.getValue());
         }
 
     }
