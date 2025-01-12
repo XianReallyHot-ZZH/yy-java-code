@@ -1,0 +1,31 @@
+spring:
+  shardingsphere:
+    datasource:
+      names: master,slave0,slave1
+      master:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/ds0?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: 123456
+      slave0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/ds1?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: 123456
+      slave1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/ds0?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: 123456
+    shardingRule:
+      master-slave-rules:
+        ms_ds:
+          master-data-source-name: master
+          slave-data-source-names: slave0,slave1
+          load-balance-algorithm-type: ROUND_ROBIN
+    props:
+      sql:
+        show: true
